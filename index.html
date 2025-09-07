@@ -1211,6 +1211,45 @@
             return `${hours}:${minutes}`;
         }
 
+        function saveFilterToLocalStorage() {
+        const tabelFilter = document.getElementById('filter-bulan-tabel').value;
+        const statFilter = document.getElementById('filter-bulan-stat').value;
+        
+        if (tabelFilter) {
+            localStorage.setItem('filterBulanTabel', tabelFilter);
+        }
+        
+        if (statFilter) {
+            localStorage.setItem('filterBulanStat', statFilter);
+        }
+    }
+    
+    // Fungsi untuk memuat filter dari local storage
+    function loadFilterFromLocalStorage() {
+        const tabelFilter = localStorage.getItem('filterBulanTabel');
+        const statFilter = localStorage.getItem('filterBulanStat');
+        
+        if (tabelFilter) {
+            document.getElementById('filter-bulan-tabel').value = tabelFilter;
+        }
+        
+        if (statFilter) {
+            document.getElementById('filter-bulan-stat').value = statFilter;
+        }
+        
+        return { tabelFilter, statFilter };
+    }
+    
+    // Event listener untuk perubahan pada filter
+    document.getElementById('filter-bulan-tabel').addEventListener('change', function() {
+        saveFilterToLocalStorage();
+        loadNotes(); // Memuat catatan dengan filter baru
+    });
+    
+    document.getElementById('filter-bulan-stat').addEventListener('change', function() {
+        saveFilterToLocalStorage();
+        loadStats(); // Memuat statistik dengan filter baru
+    });
         // Fungsi untuk memuat dan menampilkan catatan
         async function loadNotes() {
             try {
@@ -1813,6 +1852,8 @@
                 
                 document.getElementById('filter-bulan-tabel').value = currentMonth;
                 document.getElementById('filter-bulan-stat').value = currentMonth;
+
+                loadFilterFromLocalStorage();
                 
                 // Load active section from localStorage
                 const activeSection = localStorage.getItem('activeSection') || 'input';

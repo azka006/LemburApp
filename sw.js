@@ -4,7 +4,7 @@ const urlsToCache = [
   '/index.html',
   'https://cdn.jsdelivr.net/npm/chart.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.8/lottie.min.js'
+  'time.json'
 ];
 
 // Install service worker
